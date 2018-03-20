@@ -1,3 +1,4 @@
+/// DFA
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,7 +16,8 @@ class DFA{
     set < int > starifinale;
     int starestart;
 public :
-    DFA (){ cout << " Automatul a fost creat cu succes "; }
+    DFA (){ cout << " Automatul a fost creat cu succes ";
+            cout << endl; }
     ~DFA ()
     {   tranzitie.clear();
         starifinale.clear();
@@ -85,6 +87,5 @@ int main()
         else
             fout << "NU" << "\n";
     }
-
     return 0;
 }
