@@ -2,34 +2,29 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+
 int nrq, nrqf, nralfa, nrtranz;
-int x,z; char y; bool b;
+int x,z; string y; bool b;
 
 ifstream fin("input.in");
 ofstream fout("input.out");
 
 vector < int > q;
-vector < char > alfa;
+vector < string > alfa;
 
 class DFA{
-    map < pair < int, char >, int > tranzitie;
+    map < pair < int, string >, int > tranzitie;
     set < int > starifinale;
     int starestart;
 public :
-    DFA (){ cout << " Automatul a fost creat cu succes ";
-            cout << endl; }
-    ~DFA ()
-    {   tranzitie.clear();
-        starifinale.clear();
-        starestart = 0;
-        cout << " Verificati in fisierul input.out rezultatele "; }
-    void incarca_DFA();
-    bool testare(string);
+    DFA ();
+    ~DFA ();
+    bool testare(int);
 };
 
-void DFA :: incarca_DFA()
+DFA :: DFA ()
 {
-    fin >> nrq;                          /// nr de stari
+     fin >> nrq;                          /// nr de stari
     q.resize(nrq);
     for ( int i = 0; i < nrq; i++)      /// vectorul de stari
         {
@@ -54,34 +49,43 @@ void DFA :: incarca_DFA()
         starifinale.insert(x);
     }
 
-    fin >> nrtranz;
-    for ( int i = 0 ; i < nrtranz; i++)
+    fin >> nrtranz;                           /// nr de tranzitii
+    for ( int i = 0 ; i < nrtranz; i++)       /// tranzitiile
     {
         fin >> x >> y >> z;
         tranzitie[make_pair(x, y)] = z;
     }
+    cout << " AFD a fost creat cu succes" << endl;
 }
 
-bool DFA :: testare(string s)
+DFA :: ~DFA()
+{
+    tranzitie.clear();
+    starifinale.clear();
+    starestart = 0;
+    cout << " Verificati in fisierul input.out rezultatele " << endl;
+}
+
+bool DFA :: testare(int n)
 {
     int starecurenta = starestart;
-    for (string :: iterator itr = s.begin(); itr!=s.end(); ++itr)
-        starecurenta = tranzitie[make_pair(starecurenta, *itr)];
+    for (int i = 0 ; i < n ; i++)
+    {
+        fin >> y;
+        starecurenta = tranzitie[make_pair(starecurenta, y)];
+    }
     return (starifinale.find(starecurenta) != starifinale.end());
 }
 
-
 int main()
 {
-    int n;
+    int n,nr;
     DFA d;
-    d.incarca_DFA();
-    fin >> n;
-    string s;
-    for (int i = 1; i <= n; i++)
+    fin >> nr;
+    for ( int i = 0 ; i < nr; i++)
     {
-        fin >> s;
-        b = d.testare( s);
+        fin >> n;
+        b = d.testare(n);
         if (b == 1 )
             fout << "DA" << "\n";
         else
