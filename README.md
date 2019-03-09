@@ -1,3 +1,3 @@
 # DFA
-Deterministic Finite Automata
+An Deterministic Finite Automaton implemented with STL and using OOP paradigm
 
