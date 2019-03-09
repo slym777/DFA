@@ -1,2 +1,3 @@
 # DFA
-LFA (proiect 1)
+Deterministic Finite Automata
+
